@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio | Yash Kulkarni</title>
+    <meta name="description"
+        content="Computer Engineering student specializing in IoT, embedded systems, and hardware-to-cloud architectures." />
+    <meta name="theme-color" content="#05060a" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🤖%3C/text%3E%3C/svg%3E" />
+    <meta property="og:title" content="Yash Kulkarni | IoT • Embedded • Hardware-to-Cloud" />
+    <meta property="og:description"
+        content="Computer Engineering student building IoT, embedded systems and hardware-to-cloud architectures." />
+    <meta property="og:type" content="website" />
+</head>
+
+<body class="bg-void text-slate-300 antialiased">
+
+    <!-- ========== BACKGROUND LAYERS ========== -->
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+    <div class="grid-overlay" aria-hidden="true"></div>
+
+    <!-- ========== LOADER (animated in Step 2/3) ========== -->
+    <div id="loader"
+        class="fixed inset-0 z-[100] bg-void flex flex-col items-center justify-center font-mono text-neon-cyan">
+        <div class="text-xs tracking-[0.4em] mb-4 opacity-70">BOOTING SYSTEM</div>
+        <div class="w-56 h-[2px] bg-edge overflow-hidden">
+            <div id="loader-bar" class="h-full w-0 bg-neon-cyan shadow-glow-cyan"></div>
+        </div>
+        <div id="loader-text" class="mt-3 text-[10px] opacity-50">0%</div>
+    </div>
+
+    <!-- ========== APP ========== -->
+    <div id="app">
+
+        <!-- NAVBAR -->
+        <header id="nav" class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-void/70 border-b border-edge/60">
+            <nav class="max-w-6xl mx-auto px-5 sm:px-6 h-16 flex items-center justify-between">
+                <a href="#hero" id="bot" data-cursor="hover" aria-label="Go to home" class="bot-link">
+                    <svg id="bot-svg" viewBox="0 0 64 64" width="48" height="48" aria-hidden="true">
+
+                        <!-- BODY (follows cursor slightly) -->
+                        <g id="bot-body">
+                            <rect id="bot-arm-l" x="14" y="48" width="6" height="10" rx="3" fill="#00f0ff" />
+                            <rect id="bot-arm-r" x="44" y="48" width="6" height="10" rx="3" fill="#00f0ff" />
+                            <rect x="21" y="45" width="22" height="15" rx="7" fill="#0b0d14" stroke="#00f0ff"
+                                stroke-width="1.5" />
+                            <circle cx="32" cy="52.5" r="2.4" fill="#8b5cf6" class="bot-chest" />
+                        </g>
+
+                        <!-- HEAD (tilts toward cursor) -->
+                        <g id="bot-head">
+                            <!-- antenna -->
+                            <line x1="32" y1="11" x2="32" y2="5" stroke="#00f0ff" stroke-width="1.5"
+                                stroke-linecap="round" />
+                            <circle cx="32" cy="4" r="2.6" fill="#00f0ff" class="bot-tip" />
+
+                            <!-- ears -->
+                            <rect x="5.5" y="22" width="5" height="11" rx="2.5" fill="#00f0ff" />
+                            <rect x="53.5" y="22" width="5" height="11" rx="2.5" fill="#00f0ff" />
+
+                            <!-- skull + visor -->
+                            <rect x="9" y="10" width="46" height="35" rx="15" fill="#0b0d14" stroke="#00f0ff"
+                                stroke-width="1.5" />
+                            <rect x="14" y="16" width="36" height="22" rx="10" fill="#05060a" stroke="#1a1e2e"
+                                stroke-width="1" />
+
+                            <!-- eyes -->
+                            <g id="bot-eye-l">
+                                <circle cx="25" cy="27" r="6" fill="#e6fdff" />
+                                <g id="bot-pupil-l">
+                                    <circle cx="25" cy="27" r="3.2" fill="#05060a" />
+                                    <circle cx="24" cy="25.8" r="1.1" fill="#fff" />
+                                </g>
+                            </g>
+                            <g id="bot-eye-r">
+                                <circle cx="39" cy="27" r="6" fill="#e6fdff" />
+                                <g id="bot-pupil-r">
+                                    <circle cx="39" cy="27" r="3.2" fill="#05060a" />
+                                    <circle cx="38" cy="25.8" r="1.1" fill="#fff" />
+                                </g>
+                            </g>
+
+                            <!-- cheeks + mouth -->
+                            <circle cx="18.5" cy="33" r="2" fill="#ff2e97" opacity=".55" />
+                            <circle cx="45.5" cy="33" r="2" fill="#ff2e97" opacity=".55" />
+                            <path d="M28.5 34 Q32 37.5 35.5 34" fill="none" stroke="#00f0ff" stroke-width="1.5"
+                                stroke-linecap="round" />
+                        </g>
+                    </svg>
+                </a>
+
+                <ul class="hidden md:flex items-center gap-8 uppercase text-slate-400">
+                    <li><a href="#about" class="nav-link hover:text-neon-cyan transition-colors">01 About</a></li>
+                    <li><a href="#stack" class="nav-link hover:text-neon-cyan transition-colors">02 Stack</a></li>
+                    <li><a href="#projects" class="nav-link hover:text-neon-cyan transition-colors">03 Projects</a></li>
+                    <li><a href="#contact" class="nav-link hover:text-neon-cyan transition-colors">04 Contact</a></li>
+                </ul>
+
+                <button id="menu-btn" class="burger md:hidden" aria-label="Toggle menu" aria-expanded="false"
+                    aria-controls="mobile-menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </nav>
+
+            <div id="mobile-menu" class="hidden md:hidden border-t border-edge/60 bg-void/95">
+                <ul class="px-6 py-3 uppercase text-slate-300 divide-y divide-edge/60">
+                    <li><a href="#about" class="block py-4 hover:text-neon-cyan">01 About</a></li>
+                    <li><a href="#stack" class="block py-4 hover:text-neon-cyan">02 Stack</a></li>
+                    <li><a href="#projects" class="block py-4 hover:text-neon-cyan">03 Projects</a></li>
+                    <li><a href="#contact" class="block py-4 hover:text-neon-cyan">04 Contact</a></li>
+                </ul>
+            </div>
+        </header>
+
+        <main>
+
+            <!-- HERO -->
+            <section id="hero" class="relative min-h-[100svh] flex items-center px-5 sm:px-6">
+                <div class="max-w-6xl mx-auto w-full pt-24 pb-24">
+                    <p class="hero-tag font-mono text-xs tracking-[0.3em] text-neon-cyan mb-6">// HELLO, WORLD</p>
+                    <h1
+                        class="hero-title font-display font-bold text-[2.5rem] sm:text-6xl md:text-7xl leading-[1.05] break-words">
+                        <span class="block">Yash Kulkarni</span>
+                        <span
+                            class="block text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-violet">Hardware
+                            to Cloud.</span>
+                    </h1>
+                    <p class="hero-sub mt-5 font-mono text-neon-cyan text-sm sm:text-base">
+                        &gt; <span id="typed"></span><span class="caret"></span>
+                    </p>
+                    <p class="hero-sub mt-5 max-w-xl text-slate-400 text-base sm:text-lg">
+                        4th-year Computer Engineering student building IoT, embedded systems, and end-to-end
+                        hardware-to-cloud architectures.
+                    </p>
+                    <div class="hero-cta mt-10 flex flex-col sm:flex-row gap-4">
+                        <a href="#projects"
+                            class="px-6 py-3 text-center font-mono text-xs uppercase tracking-widest border border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-void transition-colors">View
+                            Projects</a>
+                        <a href="#contact"
+                            class="px-6 py-3 text-center font-mono text-xs uppercase tracking-widest border border-edge text-slate-300 hover:border-neon-violet hover:text-neon-violet transition-colors">Contact</a>
+                    </div>
+                </div>
+                <div
+                    class="hidden sm:block absolute bottom-8 left-1/2 -translate-x-1/2 font-mono text-[10px] tracking-[0.3em] text-slate-500 animate-floaty">
+                    SCROLL</div>
+            </section>
+
+            <!-- ABOUT -->
+            <section id="about" class="relative py-32 px-6">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="section-title font-mono text-xs tracking-[0.3em] text-neon-cyan mb-10">01 // ABOUT ME
+                    </h2>
+                    <!-- STEP 3: About content + stats go here -->
+                    <div class="grid lg:grid-cols-5 gap-6 lg:gap-8">
+
+                        <!-- Terminal-style bio -->
+                        <div class="glass reveal lg:col-span-3 overflow-hidden">
+                            <div class="flex items-center gap-2 px-4 py-3 border-b border-edge/80">
+                                <span class="term-dot bg-[#ff5f56]"></span>
+                                <span class="term-dot bg-[#ffbd2e]"></span>
+                                <span class="term-dot bg-[#27c93f]"></span>
+                                <span class="ml-3 font-mono text-slate-500">about.sh</span>
+                            </div>
+                            <div class="p-5 sm:p-8">
+                                <p class="text-slate-300">
+                                    I'm a <span class="text-neon-cyan">4th-year Computer Engineering</span> focused on
+                                    building IoT
+                                    and full-stack web solutions, with hands-on experience engineering industrial-grade
+                                    monitoring systems.
+
+                                </p>
+                                <p class="mt-4 text-slate-400">
+                                    I have worked across the full stack of connected systems: firmware on ESP32 boards,
+                                    MQTT
+                                    data pipelines,Modbus RTU,
+                                    Spring Boot and MongoDB backends, React dashboards, and CI/CD with Docker and
+                                    Jenkins.
+                                    I have am currently exploring Blockchain technology,and have recently built a proof
+                                    of authority blockchain and an e-wallet similar like metamask on it.
+                                </p>
+                                <div class="mt-6 flex flex-wrap gap-2">
+                                    <span class="chip">Embedded &amp; IoT</span>
+                                    <span class="chip">Hardware-to-Cloud</span>
+                                    <span class="chip">Backend &amp; DevOps</span>
+                                    <span class="chip">Blockchain</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Stats -->
+                        <div class="lg:col-span-2 grid grid-cols-2 lg:grid-cols-1 gap-3 sm:gap-4">
+                            <div class="glass reveal p-4 sm:p-6 text-center lg:text-left">
+                                <div class="font-display font-bold text-4xl sm:text-5xl text-neon-cyan"><span
+                                        data-count="10" data-suffix="+">0</span></div>
+                                <div
+                                    class="mt-1 font-mono text-[11px] sm:text-sm text-slate-400 uppercase tracking-widest">
+                                    Projects built</div>
+                            </div>
+                            <div class="glass reveal p-4 sm:p-6 text-center lg:text-left">
+                                <div class="font-display font-bold text-4xl sm:text-5xl text-neon-violet"><span
+                                        data-count="4" data-suffix="th">0</span></div>
+                                <div
+                                    class="mt-1 font-mono text-[11px] sm:text-sm text-slate-400 uppercase tracking-widest">
+                                    Year, Comp. Eng.</div>
+                            </div>
+                            <div class="glass reveal col-span-2 lg:col-span-1 p-4 sm:p-6 text-center lg:text-left">
+                                <div class="font-display font-bold text-3xl sm:text-4xl text-neon-magenta">Minor Degree
+                                </div>
+                                <div
+                                    class="mt-2 font-mono text-[12px] sm:text-sm text-slate-300 uppercase tracking-widest">
+                                    in Internet of Things</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TECH STACK -->
+            <section id="stack" class="relative py-32 px-6">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="section-title font-mono text-xs tracking-[0.3em] text-neon-cyan mb-10">02 // TECH STACK
+                    </h2>
+                    <!-- STEP 3: Tech stack grid goes here -->
+                    <div id="stack-content" class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"></div>
+                </div>
+            </section>
+
+            <!-- PROJECTS -->
+            <section id="projects" class="relative py-32 px-6">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="section-title font-mono text-xs tracking-[0.3em] text-neon-cyan mb-10">03 // PROJECTS
+                    </h2>
+                    <!-- STEP 4: 4 project cards go here -->
+                    <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"></div>
+                </div>
+            </section>
+
+            <!-- CONTACT -->
+            <section id="contact" class="relative py-32 px-6">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="section-title font-mono text-xs tracking-[0.3em] text-neon-cyan mb-10">04 // CONTACT</h2>
+                    <!-- STEP 4: Contact + socials go here -->
+                    <div id="contact-content" class="grid lg:grid-cols-5 gap-6 lg:gap-8">
+
+                        <!-- Pitch + email -->
+                        <div class="glass reveal lg:col-span-3 p-6 sm:p-10 flex flex-col justify-center">
+                            <p class="font-display font-bold text-3xl sm:text-5xl text-white leading-tight">
+                                Let's build something <span
+                                    class="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-violet">connected.</span>
+                            </p>
+                            <p class="mt-5 text-slate-400">
+                                Open to internships, collaborations and projects across IoT, embedded systems and
+                                hardware-to-cloud
+                                architectures. My inbox is always open.
+                            </p>
+                            <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                                <a href="mailto:yashk22062005@gmail.com" data-cursor="hover"
+                                    class="px-6 py-3 text-center font-mono uppercase tracking-widest border border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-void transition-colors">
+                                    Say Hello
+                                </a>
+                                <button id="copy-email" type="button" data-email="yashk22062005@gmail.com"
+                                    class="px-6 py-3 text-center font-mono uppercase tracking-widest border border-edge text-slate-300 hover:border-neon-violet hover:text-neon-violet transition-colors">
+                                    Copy Email
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Socials -->
+                        <div class="lg:col-span-2 grid gap-4">
+                            <a href="https://github.com/xiura-vs" target="_blank" rel="noopener noreferrer"
+                                data-cursor="hover" class="glass reveal social-card">
+                                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path
+                                        d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.38 7.86 10.9.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
+                                </svg>
+                                <div>
+                                    <div class="social-name">GitHub</div>
+                                    <div class="social-handle">https://github.com/xiura-vs</div>
+                                </div>
+                                <span class="social-arrow" aria-hidden="true">↗</span>
+                            </a>
+                            <a href="https://www.linkedin.com/in/yash-kulkarni-929983374" target="_blank"
+                                rel="noopener noreferrer" data-cursor="hover" class="glass reveal social-card">
+                                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path
+                                        d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z" />
+                                </svg>
+                                <div>
+                                    <div class="social-name">LinkedIn</div>
+                                    <div class="social-handle">https://www.linkedin.com/in/yash-kulkarni-929983374</div>
+                                </div>
+                                <span class="social-arrow" aria-hidden="true">↗</span>
+                            </a>
+                            <button type="button" id="copy-discord" data-handle="_grexinja_" data-cursor="hover"
+                                class="glass reveal social-card w-full text-left">
+                                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path
+                                        d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.211.375-.445.865-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.74 19.74 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.1 14.1 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
+                                </svg>
+                                <div>
+                                    <div class="social-name">Discord</div>
+                                    <div class="social-handle" id="discord-label">_grexinja_ · tap to copy</div>
+                                </div>
+                                <span class="social-arrow" aria-hidden="true">⧉</span>
+                            </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer
+            class="relative py-10 px-6 border-t border-edge/60 text-center font-mono text-[11px] tracking-widest text-slate-600">
+            <p>© <span id="year"></span> YASH KULKARNI. ALL RIGHTS RESERVED.</p>
+            <p class="mt-2 text-slate-700">DESIGNED &amp; BUILT BY YASH KULKARNI</p>
+        </footer>
+    </div>
+
+    <!-- ========== LIBRARIES (pinned versions) ========== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script defer src="js/vendor/three.min.js"></script>
+    <script defer src="js/vendor/gsap.min.js"></script>
+    <script defer src="js/vendor/ScrollTrigger.min.js"></script>
+    <script defer src="js/app.js"></script>
+</body>
+</html>
