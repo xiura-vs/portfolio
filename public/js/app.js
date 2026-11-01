@@ -409,24 +409,18 @@
     }
 
     /* ==========================================================
-       4. LOADER + HERO INTRO (GSAP)
-       ========================================================== */
-    const loader = document.getElementById('loader');
-    const bar = document.getElementById('loader-bar');
-    const txt = document.getElementById('loader-text');
-
+   4. HERO INTRO (GSAP): plays immediately on load
+   ========================================================== */
     gsap.set('.hero-tag, .hero-title > span, .hero-sub, .hero-cta > a', { opacity: 0, y: 30 });
     gsap.set('#nav', { opacity: 0, y: -20 });
 
-    const prog = { v: 0 };
-    gsap.to(prog, {
-        v: 100, duration: 1.8, ease: 'power2.inOut',
-        onUpdate: () => {
-            bar.style.width = prog.v + '%';
-            txt.textContent = Math.round(prog.v) + '%';
-        },
-        onComplete: reveal
-    });
+    gsap.timeline({ delay: 0.1 })
+        .to(state, { intro: 1, duration: 1.2, ease: 'elastic.out(1, 0.6)' }, 0)
+        .to('#nav', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 0)
+        .to('.hero-tag', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 0.1)
+        .to('.hero-title > span', { opacity: 1, y: 0, duration: 0.9, stagger: 0.15, ease: 'power3.out' }, 0.3)
+        .to('.hero-sub', { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out' }, 0.7)
+        .to('.hero-cta > a', { opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out' }, 0.9);
 
     function reveal() {
         const tl = gsap.timeline();

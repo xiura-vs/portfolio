@@ -561,21 +561,47 @@ html {
         opacity: .35;
     }
 }
+
 /* ===== TIGHTER SPACING (all devices) ===== */
-#app section:not(#hero) { padding-top: 5rem; padding-bottom: 5rem; }
-#app main section:not(#hero) h2 { margin-bottom: 2rem !important; }
+#app section:not(#hero) {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+#app main section:not(#hero) h2 {
+    margin-bottom: 2rem !important;
+}
 
 #about .grid,
 #stack-content,
 #projects-grid,
-#contact-content { gap: 1.5rem; }
+#contact-content {
+    gap: 1.5rem;
+}
 
 @media (max-width: 767px) {
-  #app section:not(#hero) { padding-top: 3rem; padding-bottom: 3rem; }
-  #app main section:not(#hero) h2 { margin-bottom: 1.25rem !important; }
+    #app section:not(#hero) {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
 
-  #about .grid,
-  #stack-content,
-  #projects-grid,
-  #contact-content { gap: 1rem; }
+    #app main section:not(#hero) h2 {
+        margin-bottom: 1.25rem !important;
+    }
+
+    #about .grid,
+    #stack-content,
+    #projects-grid,
+    #contact-content {
+        gap: 1rem;
+    }
+}
+
+/* Hero starts hidden; JS animates it in immediately */
+.hero-tag,
+.hero-title>span,
+.hero-sub,
+.hero-cta>a,
+#nav {
+    opacity: 0;
 }
