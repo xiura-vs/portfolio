@@ -484,12 +484,9 @@
         { title: 'Frontend', icon: '🖥️', items: ['React', 'JavaScript', 'Tailwind CSS', 'Three.js', 'GSAP'] },
     ];
     const stackEl = document.getElementById('stack-content');
-    stackEl.innerHTML = STACK.map(g => `
+        stackEl.innerHTML = STACK.map(g => `
       <div class="glass reveal stack-card">
-        <div class="flex items-center gap-4 mb-5">
-          <span class="stack-icon" aria-hidden="true">${g.icon}</span>
-          <h3 class="stack-title font-display font-semibold text-white">${g.title}</h3>
-        </div>
+        <h3 class="stack-title font-display font-semibold text-white mb-5">${g.title}</h3>
         <div class="flex flex-wrap gap-2.5">
           ${g.items.map(it => `<span class="chip">${it}</span>`).join('')}
         </div>
