@@ -53,6 +53,7 @@
         });
         document.body.appendChild(cursorCanvas);
         const cur = createLayer(cursorCanvas);
+        if (isTouch) cursorCanvas.style.display = 'none';   // no orb on phones/tablets
 
         /* ---------- Shared soft-glow texture (no postprocessing needed) ---------- */
         function makeGlowTexture() {
@@ -376,12 +377,12 @@
                 linkPos.set([orbLocal.x, orbLocal.y, orbLocal.z,
                 nodePos[idx * 3], nodePos[idx * 3 + 1], nodePos[idx * 3 + 2]], n * 6);
             }
-            linkGeo.setDrawRange(0, present > 0.5 ? count * 2 : 0);
+            linkGeo.setDrawRange(0, (!isTouch && present > 0.5) ? count * 2 : 0);
             linkGeo.attributes.position.needsUpdate = true;
             linkMat.color.copy(curColor);
 
             bg.renderer.render(bg.scene, bg.camera);
-            cur.renderer.render(cur.scene, cur.camera);
+            if (!isTouch) cur.renderer.render(cur.scene, cur.camera);
         }
         tick();
 
@@ -533,7 +534,7 @@
         {
             title: 'Accident Detection & Alerting System',
             desc: 'An ESP8266-powered vehicle safety system utilizing sensor fusion (accelerometer, gyroscope, and gas sensors) to detect collisions and instantly dispatch location alerts to the nearest hospital for rapid emergency medical response.',
-            tech: ['Sensor Fusion', 'Embedded C/C++', 'Twillio : Real-time Alerts']
+            tech: ['Sensor Fusion', 'Embedded C/C++', 'Twilio Alerts']
         },
         {
             title: 'IoT Environmental Monitoring Platform',
