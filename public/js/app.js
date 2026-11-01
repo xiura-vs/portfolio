@@ -478,13 +478,13 @@
 
     /* ---------- Tech stack (edit this data freely) ---------- */
     const STACK = [
-        { title: 'Embedded & Hardware', icon: '⚡', items: ['ESP32', 'Sensor Fusion', 'Industrial Gateways', 'C / C++'] },
-        { title: 'Connectivity', icon: '📡', items: ['MQTT', 'REST APIs', 'Modbus RTU', 'Real-time Telemetry'] },
-        { title: 'Backend', icon: '🗄️', items: ['C / C++', 'SQL', 'MongoDB', 'Python', 'Java'] },
-        { title: 'Frontend', icon: '🖥️', items: ['React', 'JavaScript', 'Tailwind CSS', 'Three.js', 'GSAP'] },
+        { title: 'Embedded & Hardware', items: ['ESP32', 'Sensor Fusion', 'Industrial Gateways', 'C / C++'] },
+        { title: 'Connectivity', items: ['MQTT', 'REST APIs', 'Modbus RTU', 'Real-time Telemetry'] },
+        { title: 'Backend', items: ['C / C++', 'SQL', 'MongoDB', 'Python', 'Java'] },
+        { title: 'Frontend', items: ['React', 'JavaScript', 'Tailwind CSS', 'Three.js', 'GSAP'] },
     ];
     const stackEl = document.getElementById('stack-content');
-        stackEl.innerHTML = STACK.map(g => `
+    stackEl.innerHTML = STACK.map(g => `
       <div class="glass reveal stack-card">
         <h3 class="stack-title font-display font-semibold text-white mb-5">${g.title}</h3>
         <div class="flex flex-wrap gap-2.5">
@@ -521,7 +521,7 @@
             title: 'Smart Energy Management System',
             short: 'SEMS',
             desc: 'An industrial IoT platform integrating a Selec energy meter via Modbus RTU to monitor equipment power usage, featuring automated Twilio WhatsApp and phone alerts to warn clients of energy anomalies and prevent hardware damage.',
-            tech: [ 'Industrial Gateways', 'Modbus RTU', 'React']
+            tech: ['Industrial Gateways', 'Modbus RTU', 'React']
         },
         {
             title: 'PoA Blockchain Wallet',

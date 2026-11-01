@@ -561,3 +561,32 @@ html {
         opacity: .35;
     }
 }
+/* ===== TIGHTER SPACING (all devices) ===== */
+#app section:not(#hero) { padding-top: 5rem; padding-bottom: 5rem; }
+#app main section:not(#hero) h2 { margin-bottom: 2rem !important; }
+
+#about .grid,
+#stack-content,
+#projects-grid,
+#contact-content { gap: 1.5rem; }
+
+@media (max-width: 767px) {
+  #app section:not(#hero) { padding-top: 3rem; padding-bottom: 3rem; }
+  #app main section:not(#hero) h2 { margin-bottom: 1.25rem !important; }
+
+  #about .grid,
+  #stack-content,
+  #projects-grid,
+  #contact-content { gap: 1rem; }
+}
+
+/* ===== SCROLL SNAP (touch phones/tablets only, gentle) ===== */
+@media (max-width: 767px) and (pointer: coarse) {
+  html { scroll-snap-type: y proximity; }
+  #hero,
+  #app main section:not(#hero) { scroll-snap-align: start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-snap-type: none; }
+}
